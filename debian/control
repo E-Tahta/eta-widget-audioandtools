@@ -1,0 +1,15 @@
+Source: eta-widget-audioandtools
+Section: utils
+Priority: optional
+Maintainer: Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+Build-Depends: debhelper (>= 9),
+Standards-Version: 3.9.6
+Homepage: http://etap.org.tr
+
+Package: eta-widget-audioandtools
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, kmix
+Description: ETAP ses ve araçlar gereci
+ Panel içerisinde kullanılabilen eta uygulamalarını
+ hızlıca başlatmaya ve ses kontrolünü yapmaya 
+ yarayan bir gereç.
