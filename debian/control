@@ -8,7 +8,7 @@ Homepage: http://etap.org.tr
 
 Package: eta-widget-audioandtools
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}, kmix
+Depends: ${shlibs:Depends}, ${misc:Depends}, kmix, eta-keyboard, eta-pen, ksnapshot, eta-black
 Description: ETAP ses ve araçlar gereci
  Panel içerisinde kullanılabilen eta uygulamalarını
  hızlıca başlatmaya ve ses kontrolünü yapmaya 
