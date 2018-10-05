@@ -1,3 +1,9 @@
+eta-widget-audioandtools (1.1) unstable; urgency=medium
+
+  * Update control file
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Fri, 05 Oct 2018 16:12:24 +0300
+
 eta-widget-audioandtools (1.0) unstable; urgency=medium
 
   * Initial release.
