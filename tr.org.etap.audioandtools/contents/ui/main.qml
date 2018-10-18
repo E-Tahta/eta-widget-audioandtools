@@ -300,6 +300,11 @@ Item {
                 target: yardimtext
                 color: "#FF6C00"
             }
+
+            PropertyChanges {
+                target: helper
+                color: "#383838"
+            }
         },
         State {
             name: 'invisible'
@@ -313,6 +318,10 @@ Item {
             PropertyChanges {
                 target: yardimtext
                 color: "#969699"
+            }
+            PropertyChanges {
+                target: helper
+                color: "transparent"
             }
         }
     ]

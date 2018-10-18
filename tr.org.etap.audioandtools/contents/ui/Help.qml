@@ -36,7 +36,7 @@ Rectangle {
         Item {
             id:userManuel
             height: pop.height/2
-            width: minimumWidth + 1
+            width: root.width + 1
             Rectangle {
                 id:circle1
                 height: circleHeight
@@ -72,13 +72,12 @@ Rectangle {
                     ["/usr/share/eta/eta-help/user_guide.pdf"]);
                     guideline.color= "#ffffff";
                     root.state = 'invisible';
-                    helper.color= "#ffffff";
                 }
             }
         }//user manual
         Item {
             height: pop.height/2
-            width: minimumWidth +1
+            width: root.width +1
             Rectangle {
                 id:circle2
                 height: circleHeight
@@ -113,7 +112,6 @@ Rectangle {
                     plasmoid.runCommand("/usr/bin/eta-help");
                     helpmsg.color= "#ffffff";
                     root.state = 'invisible';
-                    helper.color= "#ffffff";
                 }
             }
         }// helper
