@@ -28,26 +28,11 @@ Item {
      * Indicates that the font of the texts in the widget.
      */
     property string textFont
-
-    /**
-     * Indicates that the minimum width of the widget regarding the screen
-     * resolution. The static number 14 represents the actual persentage
-     * of the screen width that specified after longterm researches about
-     * Interactive White Board.
-     */
-    property int minimumWidth : paintedWidth
-
-    /**
-     * Indicates that the minimum height of the widget regarding the screen
-     * resolution.
-     */
+    //property int minimumWidth : paintedWidth
     property int minimumHeight : volumeChanger.height + bottomseperator.height + closer.height
-
-    /**
-     * Indicates that the global veriable for general line alignment
-     * regarding the screen resolution.
-     */
-    property int lineAlign: root.width*7/100
+    property int lineAlign: root.width * 7 / 100
+    property string textColor: "#969699"
+    property string textPressedColor: "#FF6C00"
 
     Column {
         anchors.fill:parent
@@ -178,17 +163,17 @@ Item {
                 MouseArea {
                     anchors.fill: parent
 
-                    onPressAndHold: {helper.color= "#383838"; yardimtext.color = "#FF6C00";}
-                    onPressed: {helper.color= "#383838"; yardimtext.color = "#FF6C00";}
+                    onPressAndHold: {helper.color= "#383838"; yardimtext.color = textPressedColor }
+                    onPressed: {helper.color= "#383838"; yardimtext.color = textPressedColor }
                     onReleased: {
                         if(root.state == 'visible') {
                             root.state = 'invisible'
                             helper.color= "transparent"
-                            yardimtext.color = "#969699";
+                            yardimtext.color = textColor
                         } else {
                             root.state = 'visible'
                             helper.color= "#383838"
-                            yardimtext.color = "#FF6C00"
+                            yardimtext.color = textPressedColor
                         }
                     }
                 }
@@ -209,66 +194,62 @@ Item {
             }
             Rectangle {
                 id:closer
-                width: root.width/2 -1
+                width: root.width / 2 - 1
                 height: root.width *15/100
                 color:"transparent"
-                Row {
-                    anchors {
-                        top:parent.top
-                        topMargin:0
-                        fill:parent
-                    }
-                    Item {
-                        id:toolbuttonkapatcontainer
-                        width: root.width *13/100
-                        height: root.width *13/100
-                        anchors {
-                            left : parent.left
-                            leftMargin: lineAlign -10
-                            verticalCenter: parent.verticalCenter
-                        }
-                        PlasmaWidgets.IconWidget {
-                            id: kapatIcon
-                            anchors.fill:parent
-                            Component.onCompleted: {
-                                setIcon("eta-shutdown")
-                            }
-                        }
-                    }//item toolbuttonappcontainer
-                    Item {
-                        anchors {
-                            left:toolbuttonkapatcontainer.right
-                            leftMargin :lineAlign -8
-                            verticalCenter: parent.verticalCenter
-                        }
-                        Text {
-                            id:kapattext
-                            text: "KAPAT"
-                            color: "#969699"
-                            font.family:textFont
-                            font.bold : true
-                            font.pointSize: 10
-                            elide: Text.ElideLeft
-                            horizontalAlignment: Text.AlignLeft
-                            anchors {
-                                left: parent.left
-                                leftMargin: 0
-                                verticalCenter: parent.verticalCenter
-                                verticalCenterOffset: 0
-                            }
-                        }//label
-                    }//item labelcontainer
-                }//Row
-                MouseArea {
-                    anchors.fill: parent
 
-                    onPressAndHold: {kapattext.color= "#FF6C00"; }
-                    onPressed: {kapattext.color= "#FF6C00"; }
-                    onReleased: {
-                        plasmoid.runCommand("qdbus", ["org.kde.ksmserver",
-                                                      "/KSMServer", "org.kde.KSMServerInterface.logout",
-                                                      "1", "-1", "-1"]);
-                        kapattext.color= "#969699";
+                Item {
+                    id:kapatIconContainer
+                    height: parent.height
+                    width: root.width *13/100
+                    anchors {
+                        left : parent.left
+                        leftMargin: lineAlign -10
+                        verticalCenter: parent.verticalCenter
+                    }
+                    PlasmaWidgets.IconWidget {
+                        id: kapatIcon
+                        anchors.fill:parent
+                        onClicked: {
+                            plasmoid.runCommand("qdbus", ["org.kde.ksmserver",
+                                                          "/KSMServer", "org.kde.KSMServerInterface.logout",
+                                                          "1", "-1", "-1"])
+                        }
+                        Component.onCompleted: {
+                            setIcon("eta-shutdown")
+                        }
+                    }
+                }
+                Item {
+                    height: parent.height
+                    width: parent.width - kapatIconContainer.width - lineAlign + 11
+                    anchors {
+                        left:kapatIconContainer.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Text {
+                        id:kapatText
+                        text: "KAPAT"
+                        color: textColor
+                        font.family:textFont
+                        font.bold : true
+                        verticalAlignment: Text.AlignVCenter
+                        font.pointSize: 10
+                        elide: Text.ElideLeft
+                        horizontalAlignment: Text.AlignLeft
+                        anchors {
+                            left: parent.left
+                            leftMargin: lineAlign - 8
+                            verticalCenter: parent.verticalCenter
+                            verticalCenterOffset: 0
+                        }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressAndHold: { kapatText.color= textPressedColor }
+                        onPressed: { kapatText.color= textPressedColor }
+                        onReleased: { kapatText.color= textColor }
+                        onClicked: { kapatIcon.clicked() }
                     }
                 }
             }

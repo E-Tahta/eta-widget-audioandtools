@@ -27,8 +27,7 @@ import QtQuick 1.1
  */
 Rectangle {
     id:pop
-    color:"#383838"
-    property string pressedTextColor : "#FF6C00"
+    color:"#383838"    
     property string circleColors : "#FFFFFF"
     property string circleHeight : lineAlign
     property int fontPointSize : 12
@@ -65,10 +64,10 @@ Rectangle {
             }
             MouseArea{
                 anchors.fill: parent
-                onPressAndHold: { guideline.color = pressedTextColor; }
-                onPressed: {guideline.color = pressedTextColor; }
+                onPressAndHold: { guideline.color = textPressedColor }
+                onPressed: {guideline.color = textPressedColor }
                 onReleased: {
-                    plasmoid.runCommand("okular",
+                    plasmoid.runCommand("xdg-open",
                     ["/usr/share/eta/eta-help/user_guide.pdf"]);
                     guideline.color= "#ffffff";
                     root.state = 'invisible';
@@ -106,8 +105,8 @@ Rectangle {
             }
             MouseArea {
                 anchors.fill: parent
-                onPressAndHold: { helpmsg.color= pressedTextColor; }
-                onPressed: {helpmsg.color= pressedTextColor; }
+                onPressAndHold: { helpmsg.color= textPressedColor }
+                onPressed: {helpmsg.color= textPressedColor }
                 onReleased: {
                     plasmoid.runCommand("/usr/bin/eta-help");
                     helpmsg.color= "#ffffff";
